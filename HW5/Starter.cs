@@ -11,17 +11,16 @@ namespace HW5
     internal class Starter
     {
         private Action _action;
-        private Logger _logger;
-        private Result _result;
+        private Logger _instance;
         public Starter()
         {
             _action = new Action();
-            _logger = Logger.GetLog();
-            _result = new Result();
+            _instance = Logger.GetLog();
         }
 
         internal void Run()
         {
+            Result result = new Result();
             for (int i = 0; i < 100; i++)
             {
                 int typeActionMethod = new Random().Next(1, 4);
@@ -29,22 +28,22 @@ namespace HW5
                 switch (typeActionMethod)
                 {
                     case 1:
-                        _result = _action.CreateLogInfo();
+                        result = _action.CreateLogInfo();
                         break;
                     case 2:
-                        _result = _action.CreateLogWarning();
+                        result = _action.CreateLogWarning();
                         break;
                     case 3:
-                        _result = _action.BrokeLogic();
+                        result = _action.BrokeLogic();
                         break;
                 }
 
-                if (!_result.Status)
+                if (!result.Status)
                 {
-                    _logger.LoggerError($"Action failed by a reason: {_result.Message}");
+                    _instance.LoggerError($"Action failed by a reason: {result.Message}");
                 }
 
-                File.WriteAllText(@"log.txt", _logger.AllLogs);
+                File.WriteAllText(@"log.txt", _instance.AllLogs);
             }
         }
     }

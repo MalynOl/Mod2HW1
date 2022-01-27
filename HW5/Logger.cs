@@ -8,7 +8,7 @@ namespace HW5
 {
     public class Logger
     {
-        private static readonly Logger Log = new Logger();
+        private static readonly Logger Instance = new Logger();
         private StringBuilder _sbLogs;
 
         static Logger()
@@ -20,15 +20,10 @@ namespace HW5
             _sbLogs = new StringBuilder();
         }
 
-        public DateTime LogTime { get; set; }
-        public TypeLog LogType { get; set; }
-
-        public string LogMessage { get; set; }
-
         public string AllLogs => _sbLogs.ToString();
         public static Logger GetLog()
         {
-                return Log;
+                return Instance;
         }
 
         public void LoggerInfo(string messageLog)
@@ -48,10 +43,7 @@ namespace HW5
 
         public void LoggerSet(TypeLog tl, string mes)
         {
-            Log.LogType = tl;
-            Log.LogMessage = mes;
-            Log.LogTime = DateTime.Now;
-            var log = $"{Log.LogTime.ToString()}: {Log.LogType.ToString()}: {Log.LogMessage.ToString()}\n";
+            var log = $"{DateTime.Now.ToString()}: {tl.ToString()}: {mes.ToString()}\n";
             _sbLogs.Append(log);
             Console.WriteLine(log);
         }

@@ -22,17 +22,7 @@ namespace HW5
         {
         }
 
-        public bool Status
-        {
-            get
-            {
-                return _status;
-            }
-            set
-            {
-                _status = value;
-            }
-        }
+        public bool Status { get; set; }
 
         public string Message { get; set; }
     }

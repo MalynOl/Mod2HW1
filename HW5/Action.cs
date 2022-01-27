@@ -8,17 +8,17 @@ namespace HW5
 {
     internal class Action
     {
-        private readonly Logger _logger = Logger.GetLog();
+        private readonly Logger _instance = Logger.GetLog();
         internal Result CreateLogInfo()
         {
-            _logger.LoggerInfo($"Start method: CreateLogInfo()");
+            _instance.LoggerInfo($"Start method: CreateLogInfo()");
             Result result = new Result(true);
             return result;
         }
 
         internal Result CreateLogWarning()
         {
-            _logger.LoggerWarning("Skipped logic in method: CreateLogWarning()");
+            _instance.LoggerWarning("Skipped logic in method: CreateLogWarning()");
             Result result = new Result(true);
             return result;
         }
